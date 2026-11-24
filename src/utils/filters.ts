@@ -1,0 +1,24 @@
+import type { Product, ProductFilters } from '../types/product';
+
+export const EMPTY_FILTERS: ProductFilters = { texto: '', categoria: '', soloStockBajo: false };
+
+const normalize = (text: string): string =>
+  text.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim();
+
+export const isLowStock = (p: Pick<Product, 'stock' | 'stockMinimo'>): boolean => p.stock <= p.stockMinimo;
+
+export function filterProducts(products: Product[], filters: ProductFilters): Product[] {
+  const texto = normalize(filters.texto);
+  return products.filter((p) => {
+    const matchesText =
+      texto === '' ||
+      [p.codigo, p.nombre, p.marca, p.subcategoria].some((field) => normalize(field).includes(texto));
+    const matchesCategory = filters.categoria === '' || p.categoria === filters.categoria;
+    const matchesStock = !filters.soloStockBajo || isLowStock(p);
+    return matchesText && matchesCategory && matchesStock;
+  });
+}
+
+/** Categorías distintas presentes en una lista de productos, en orden alfabético. */
+export const categoriasDe = (products: Product[]): string[] =>
+  [...new Set(products.map((p) => p.categoria))].sort((a, b) => a.localeCompare(b, 'es'));
