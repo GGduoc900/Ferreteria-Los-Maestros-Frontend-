@@ -1,16 +1,22 @@
+import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { Alert } from '../components/atoms/Alert';
 import { Cargando } from '../components/atoms/Cargando';
 import { ProductImage } from '../components/atoms/ProductImage';
 import { SoloRol } from '../components/atoms/SoloRol';
 import { getProductImage } from '../utils/image';
+import { AddToCartButton } from '../components/molecules/AddToCartButton';
 import { StockBadge } from '../components/molecules/StockBadge';
+import { useCart } from '../context/CartContext';
 import { useProducto } from '../hooks/useProducts';
+import { maxCantidad } from '../utils/cart';
 import { formatCLP } from '../utils/format';
 
 export function ProductDetailPage() {
   const { codigo } = useParams<{ codigo: string }>();
   const { product, loading, error } = useProducto(codigo, 'catalogo');
+  const { enCarrito } = useCart();
+  const [cantidad, setCantidad] = useState(1);
 
   if (loading) return <Cargando texto="Cargando producto…" />;
 
@@ -42,6 +48,32 @@ export function ProductDetailPage() {
             <p className="lm-detail-price mb-3">{formatCLP(product.precioVenta)}</p>
             <p className="mb-2">Stock disponible: <strong>{product.stock}</strong> (mínimo de reposición: {product.stockMinimo})</p>
             <StockBadge product={product} />
+            {maxCantidad(product) > 0 && (
+              <div className="d-flex flex-wrap align-items-end gap-3 mt-3">
+                <div>
+                  <label htmlFor="cantidad" className="form-label fw-semibold mb-1">Cantidad</label>
+                  <input
+                    id="cantidad"
+                    type="number"
+                    className="form-control"
+                    style={{ width: 100 }}
+                    min={1}
+                    max={maxCantidad(product)}
+                    value={cantidad}
+                    onChange={(e) => {
+                      const n = Math.floor(Number(e.target.value));
+                      setCantidad(Number.isFinite(n) ? Math.min(Math.max(n, 1), maxCantidad(product)) : 1);
+                    }}
+                  />
+                </div>
+                <AddToCartButton product={product} cantidad={cantidad} className="btn btn-primary" />
+                {enCarrito(product.codigo) > 0 && (
+                  <Link to="/carrito" className="btn btn-outline-primary">
+                    Ver carrito ({enCarrito(product.codigo)})
+                  </Link>
+                )}
+              </div>
+            )}
             {/* Acción visible solo para administradores */}
             <SoloRol roles={['ADMIN']}>
               <div className="mt-3">

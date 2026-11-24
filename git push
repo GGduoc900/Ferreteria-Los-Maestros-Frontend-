@@ -1,0 +1,20 @@
+ .env.example                                 |   3 [32m+[m
+ .gitignore                                   |   4 [32m+[m
+ README.md                                    |   2 [32m+[m[31m-[m
+ src/App.tsx                                  |  11 [32m+[m[31m-[m
+ src/components/molecules/AddToCartButton.tsx |  40 [32m++++++[m
+ src/components/molecules/ProductCard.tsx     |  12 [32m+[m[31m-[m
+ src/components/molecules/ResumenPedido.tsx   |  23 [32m+++[m
+ src/components/organisms/AppNavbar.tsx       |  14 [32m++[m
+ src/context/CartContext.tsx                  |  73 [32m++++++++++[m
+ src/data/pagos.ts                            |  30 [32m++++[m
+ src/pages/CarritoPage.tsx                    |  96 [32m+++++++++++++[m
+ src/pages/CheckoutPage.tsx                   | 203 [32m+++++++++++++++++++++++++++[m
+ src/pages/PedidoPage.tsx                     |  84 [32m+++++++++++[m
+ src/pages/ProductDetailPage.tsx              |  34 [32m++++[m[31m-[m
+ src/services/pedidoService.ts                |  90 [32m++++++++++++[m
+ src/tests/carrito.test.tsx                   | 132 [32m+++++++++++++++++[m
+ src/types/cart.ts                            |  34 [32m+++++[m
+ src/utils/cart.ts                            |  52 [32m+++++++[m
+ src/utils/pago.ts                            |  97 [32m+++++++++++++[m
+ 19 files changed, 1027 insertions(+), 7 deletions(-)

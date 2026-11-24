@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
+import { useCart } from '../../context/CartContext';
 
 export function AppNavbar() {
   const [open, setOpen] = useState(false);
   const { usuario, tieneRol, cerrarSesion } = useAuth();
+  const { cantidad } = useCart();
   const navigate = useNavigate();
 
   const close = () => setOpen(false);
@@ -75,6 +77,18 @@ export function AppNavbar() {
                 onClick={close}
               >
                 Ubicación
+              </NavLink>
+            </li>
+
+            <li className="nav-item">
+              <NavLink
+                to="/carrito"
+                className={linkClass}
+                onClick={close}
+                aria-label={cantidad > 0 ? `Carrito, ${cantidad} ${cantidad === 1 ? 'producto' : 'productos'}` : 'Carrito'}
+              >
+                🛒 Carrito
+                {cantidad > 0 && <span className="badge rounded-pill lm-cart-badge ms-1">{cantidad}</span>}
               </NavLink>
             </li>
 
