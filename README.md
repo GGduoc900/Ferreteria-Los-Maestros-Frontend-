@@ -1,4 +1,4 @@
-# Ferretería Los Maestros – Evaluación Parcial 2 (DSY1104)
+# Ferretería Los Maestros – Evaluación Parcial 3 (DSY1104)
 
 Frontend con **React + Vite + TypeScript**, Bootstrap, React Router y pruebas con Vitest + React Testing Library.
 Se conecta a los **7 microservicios Spring Boot** (`microservicios-ferreteria`) mediante su API REST, con inicio de sesión JWT y rutas protegidas por rol.
