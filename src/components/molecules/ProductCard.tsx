@@ -3,6 +3,7 @@ import type { Product } from '../../types/product';
 import { formatCLP } from '../../utils/format';
 import { getProductImage } from '../../utils/image';
 import { ProductImage } from '../atoms/ProductImage';
+import { AddToCartButton } from './AddToCartButton';
 import { StockBadge } from './StockBadge';
 
 interface ProductCardProps {
@@ -21,9 +22,12 @@ export function ProductCard({ product }: ProductCardProps) {
         <h2 className="h6 mt-1 mb-2">{product.nombre}</h2>
         <p className="lm-price mb-2">{formatCLP(product.precioVenta)}</p>
         <div className="mb-3"><StockBadge product={product} /></div>
-        <Link to={`/producto/${product.codigo}`} className="btn btn-outline-primary btn-sm mt-auto">
-          Ver detalle
-        </Link>
+        <div className="d-grid gap-2 mt-auto">
+          <AddToCartButton product={product} />
+          <Link to={`/producto/${product.codigo}`} className="btn btn-outline-primary btn-sm">
+            Ver detalle
+          </Link>
+        </div>
       </div>
     </div>
   );

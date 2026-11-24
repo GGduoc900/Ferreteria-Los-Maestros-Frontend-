@@ -119,3 +119,22 @@ h1, h2, h3, h4, h5, h6 { color: var(--lm-navy); font-weight: 700; }
   .lm-hero { padding: 1.5rem; }
   .lm-hero-stats { gap: 1.25rem; }
 }
+
+/* Carrito y pago */
+.lm-cart-badge { background: var(--lm-orange); color: #fff; font-size: 0.7rem; }
+.lm-cart-row { display: flex; align-items: center; gap: 1rem; padding: 1rem 1.25rem; border-bottom: 1px solid #e3e7ed; flex-wrap: wrap; }
+.lm-cart-row:last-child { border-bottom: 0; }
+.lm-cart-thumb { width: 80px; flex: none; background: #f1f3f6; border-radius: 8px; }
+.lm-qty { display: inline-flex; align-items: center; gap: 0.5rem; }
+.lm-qty-value { min-width: 2ch; text-align: center; font-weight: 700; }
+.lm-cart-subtotal { min-width: 90px; text-align: right; font-weight: 700; color: var(--lm-navy); }
+.lm-pay-option {
+  display: flex; align-items: center; gap: 0.9rem; padding: 0.85rem 1rem; cursor: pointer;
+  border: 2px solid #e3e7ed; border-radius: 12px; background: #fff; transition: border-color 0.15s, background 0.15s;
+}
+.lm-pay-option:hover { border-color: var(--lm-orange); }
+.lm-pay-option.selected { border-color: var(--lm-orange); background: var(--lm-orange-soft); }
+.lm-pay-icon { font-size: 1.6rem; }
+.lm-sticky { position: sticky; top: 1rem; }
+@media (max-width: 576px) { .lm-cart-subtotal { text-align: left; } }
+@media print { .lm-navbar, .lm-footer, .btn { display: none !important; } }
